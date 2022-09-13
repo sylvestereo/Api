@@ -13,15 +13,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import django_heroku
 
-
-# Build paths inside the project like this: os.path.join(BASE_DIR / 'subdir'.)
-import os
-import dj_database_url
-
-
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -46,18 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "pages",
-    "django_markdown",
     "rest_framework",
     "api",
 ]
-
-AUTH_USER_MODEL = 'custom_user.CustomUser'
-
-AUTHENTICATION_BACKENDS = (
-    'custom_user.backends.CustomUserAuth',
-    'django.contrib.auth.backends.ModelBackend',
-    # 'django.contrib.auth.backends.RemoteUserBackend',
-)
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -67,10 +51,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = "Login.urls"
@@ -137,14 +117,9 @@ CORS_ALLOWED_ORIGINS = [
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = [
-    BASE_DIR / "static"
-(
-    os.path.join(PROJECT_ROOT, 'static'),
-)
-]
-
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static"
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -154,6 +129,3 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 django_heroku.settings(locals())
-
-
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
